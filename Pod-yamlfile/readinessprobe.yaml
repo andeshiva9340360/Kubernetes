@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: readinessprobe
+spec:
+    containers:
+    - name: httpd
+      image: httpd:latest
+      command:
+        - /bin/bash
+        - -ec
+        - sleep 30; touch /tmp/tuto; sleep 600
+      livenessProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/tuto
+        initialDelaySeconds: 5
+        periodSeconds: 5
+            command:
+                - cat
+                - /tmp/ready
+         initialDelaySeconds: 10
+        periodSeconds: 5        
